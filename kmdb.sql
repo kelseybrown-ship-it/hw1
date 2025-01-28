@@ -1,3 +1,91 @@
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS studio;
+DROP TABLE IF EXISTS talent;
+
+-- create tables--
+
+CREATE TABLE movies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    year TEXT, 
+    MPAA_rating TEXT,
+    studio_name TEXT
+); 
+
+CREATE TABLE studio (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT, 
+    movie_id INTEGER
+);
+
+CREATE TABLE talent ( 
+    id  INTEGER PRIMARY KEY AUTOINCREMENT,
+    movie_name TEXT, 
+    actor_name TEXT, 
+    character_name TEXT
+);
+
+INSERT INTO movies (
+    title,
+    year,
+    MPAA_rating
+)
+
+Values (
+    "Batman Begins",
+    "2005",
+    "PG-13"
+);
+
+INSERT INTO movies (
+    title,
+    year,
+    MPAA_rating
+)
+
+Values (
+    "The Dark Knight",
+    "2008",
+    "PG-13"
+);
+
+INSERT INTO movies (
+    title,
+    year,
+    MPAA_rating
+)
+
+Values (
+    "The Dark Knight Rises",
+    "2012",
+    "PG-13"
+);
+
+INSERT INTO studio (
+    name
+)
+
+Values (
+    " Warner Bros"
+);
+
+INSERT INTO talent (  
+    movie_name,
+    actor_name, 
+    character_name
+)
+
+Values (
+"Batman Begins",
+"Christian Bale",
+"Bruce Wayne"
+);
+
+SELECT * from movies;
+
+SELECT * from studio;
+
+SELECT * from talent;
 -- In this assignment, you'll be building the domain model, database 
 -- structure, and data for "KMDB" (the Kellogg Movie Database).
 -- The end product will be a report that prints the movies and the 
@@ -137,3 +225,4 @@
 
 -- The SQL statement for the cast output
 -- TODO!
+
