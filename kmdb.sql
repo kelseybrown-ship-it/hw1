@@ -40,9 +40,8 @@ INSERT INTO studio (
     name
 )
 
-Values (
-    " Warner Bros"
-);
+Values (" Warner Bros"), ("Warner Bros"), ("Warner Bros");
+
 INSERT INTO talent (
     movie_name, actor_name, character_name
 )
@@ -53,10 +52,18 @@ Values ("Batman Begins","Christian Bale","Bruce Wayne" ), ("Batman Begins","Mich
 ("The Dark Knight Rises","Christian Bale", "Bruce Wayne"), ("The Dark Knight Rises","Gary Oldman", "Commissioner Gordon"), ("The Dark Knight Rises","Tom Hardy", "Bane"),
  ("The Dark Knight Rises","Joseph Gordon-Levitt", "John Blake"), ("The Dark Knight Rises","Anne Hathaway", "Selina Kyle");
 
+--As a guest, I want to see a list of movies with the title, year released,
+--   MPAA rating, and studio information.
+
 Select movies.title, movies.year, movies.MPAA_rating, studio.name
 from studio
 INNER JOIN movies on studio.id = movies.studio_id
 WHERE studio.name = "Warner Bros";
+
+ --As a guest, I want to see the movies which a single studio has produced.
+SELECT movies.name, studio.name
+from (studio 
+INNER JOIN studio.id = movie.studio_id);
 
 --SELECT * from movies;
 
