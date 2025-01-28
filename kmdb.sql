@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS talent;
 
 CREATE TABLE movies (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT,
+    name TEXT,
     year TEXT, 
     MPAA_rating TEXT,
     studio_id INTEGER,
@@ -28,7 +28,7 @@ CREATE TABLE talent (
 );
 
 INSERT INTO movies (
-    title,
+    name,
     year,
     MPAA_rating
 )
@@ -55,15 +55,16 @@ Values ("Batman Begins","Christian Bale","Bruce Wayne" ), ("Batman Begins","Mich
 --As a guest, I want to see a list of movies with the title, year released,
 --   MPAA rating, and studio information.
 
-Select movies.title, movies.year, movies.MPAA_rating, studio.name
+Select movies.name, movies.year, movies.MPAA_rating, studio.name
 from studio
 INNER JOIN movies on studio.id = movies.studio_id
 WHERE studio.name = "Warner Bros";
 
  --As a guest, I want to see the movies which a single studio has produced.
 SELECT movies.name, studio.name
-from (studio 
-INNER JOIN studio.id = movie.studio_id);
+from movies
+INNER JOIN movies on movies.studio_id=studio.id
+WHERE studio_name= "Warner Bros";
 
 --SELECT * from movies;
 
