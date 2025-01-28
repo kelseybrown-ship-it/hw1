@@ -10,7 +10,7 @@ CREATE TABLE movies (
     year TEXT, 
     MPAA_rating TEXT,
     studio_id INTEGER,
-    studio_name TEXT
+    talent_id INTEGER
 ); 
 
 CREATE TABLE studio (
@@ -66,11 +66,11 @@ from movies
 INNER JOIN movies on movies.studio_id=studio.id
 WHERE studio_name= "Warner Bros";
 
---SELECT * from movies;
+SELECT * from movies;
 
---SELECT * from studio;
+SELECT * from studio;
 
---SELECT * from talent;
+SELECT * from talent;
 -- In this assignment, you'll be building the domain model, database 
 -- structure, and data for "KMDB" (the Kellogg Movie Database).
 -- The end product will be a report that prints the movies and the 
