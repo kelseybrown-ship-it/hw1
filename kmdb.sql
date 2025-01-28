@@ -9,6 +9,7 @@ CREATE TABLE movies (
     title TEXT,
     year TEXT, 
     MPAA_rating TEXT,
+    studio_id INTEGER,
     studio_name TEXT
 ); 
 
@@ -22,7 +23,8 @@ CREATE TABLE talent (
     id  INTEGER PRIMARY KEY AUTOINCREMENT,
     movie_name TEXT, 
     actor_name TEXT, 
-    character_name TEXT
+    character_name TEXT, 
+    movie_id INTEGER
 );
 
 INSERT INTO movies (
@@ -32,34 +34,7 @@ INSERT INTO movies (
 )
 
 Values (
-    "Batman Begins",
-    "2005",
-    "PG-13"
-);
-
-INSERT INTO movies (
-    title,
-    year,
-    MPAA_rating
-)
-
-Values (
-    "The Dark Knight",
-    "2008",
-    "PG-13"
-);
-
-INSERT INTO movies (
-    title,
-    year,
-    MPAA_rating
-)
-
-Values (
-    "The Dark Knight Rises",
-    "2012",
-    "PG-13"
-);
+    "Batman Begins","2005","PG-13"), ("The Dark Knight","2008","PG-13"), ("The Dark Knight Rises","2012","PG-13");
 
 INSERT INTO studio (
     name
@@ -68,24 +43,26 @@ INSERT INTO studio (
 Values (
     " Warner Bros"
 );
-
-INSERT INTO talent (  
-    movie_name,
-    actor_name, 
-    character_name
+INSERT INTO talent (
+    movie_name, actor_name, character_name
 )
 
-Values (
-"Batman Begins",
-"Christian Bale",
-"Bruce Wayne"
-);
+Values ("Batman Begins","Christian Bale","Bruce Wayne" ), ("Batman Begins","Michael Caine", "Alfred"), ("Batman Begins","Liam Neeson", "Ra Al Ghul"), ("Batman Begins","Katie Holmes", "Rachel Dawes"), 
+("Batman Begins","Gary Oldman","Commissioner Gordon"), ("The Dark Knight","Christian Bale", "Bruce Wayne"), ("The Dark Knight","Heath Ledger", "Joker"), 
+("The Dark Knight","Aaron Eckhart","Harvey Dent"), ("The Dark Knight","Michael Caine", "Alfred"), ("The Dark Knight","Maggie Gyllenhaal", "Rachel Dawes"), 
+("The Dark Knight Rises","Christian Bale", "Bruce Wayne"), ("The Dark Knight Rises","Gary Oldman", "Commissioner Gordon"), ("The Dark Knight Rises","Tom Hardy", "Bane"),
+ ("The Dark Knight Rises","Joseph Gordon-Levitt", "John Blake"), ("The Dark Knight Rises","Anne Hathaway", "Selina Kyle");
 
-SELECT * from movies;
+Select movies.title, movies.year, movies.MPAA_rating, studio.name
+from studio
+INNER JOIN movies on studio.id = movies.studio_id
+WHERE studio.name = "Warner Bros";
 
-SELECT * from studio;
+--SELECT * from movies;
 
-SELECT * from talent;
+--SELECT * from studio;
+
+--SELECT * from talent;
 -- In this assignment, you'll be building the domain model, database 
 -- structure, and data for "KMDB" (the Kellogg Movie Database).
 -- The end product will be a report that prints the movies and the 
