@@ -6,71 +6,80 @@ DROP TABLE IF EXISTS talent;
 
 CREATE TABLE movies (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    year TEXT, 
+    title TEXT,
+    year_released TEXT, 
     MPAA_rating TEXT,
-    studio_id INTEGER,
-    talent_id INTEGER
+    studio_id INTEGER
 ); 
 
 CREATE TABLE studio (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT, 
-    movie_id INTEGER
+    name TEXT
 );
 
 CREATE TABLE talent ( 
     id  INTEGER PRIMARY KEY AUTOINCREMENT,
-    movie_name TEXT, 
+    movie_id INTEGER, 
     actor_name TEXT, 
-    character_name TEXT, 
-    movie_id INTEGER
+    character_name TEXT
 );
 
 INSERT INTO movies (
-    name,
-    year,
-    MPAA_rating
+    title,
+    year_released,
+    MPAA_rating,
+    studio_id
 )
 
 Values (
-    "Batman Begins","2005","PG-13"), ("The Dark Knight","2008","PG-13"), ("The Dark Knight Rises","2012","PG-13");
+    "Batman Begins","2005","PG-13",1), ("The Dark Knight","2008","PG-13",1), ("The Dark Knight Rises","2012","PG-13",1);
 
 INSERT INTO studio (
     name
 )
 
-Values (" Warner Bros"), ("Warner Bros"), ("Warner Bros");
+Values (" Warner Bros");
 
 INSERT INTO talent (
-    movie_name, actor_name, character_name
-)
+    movie_id, actor_name, character_name)
 
-Values ("Batman Begins","Christian Bale","Bruce Wayne" ), ("Batman Begins","Michael Caine", "Alfred"), ("Batman Begins","Liam Neeson", "Ra Al Ghul"), ("Batman Begins","Katie Holmes", "Rachel Dawes"), 
-("Batman Begins","Gary Oldman","Commissioner Gordon"), ("The Dark Knight","Christian Bale", "Bruce Wayne"), ("The Dark Knight","Heath Ledger", "Joker"), 
-("The Dark Knight","Aaron Eckhart","Harvey Dent"), ("The Dark Knight","Michael Caine", "Alfred"), ("The Dark Knight","Maggie Gyllenhaal", "Rachel Dawes"), 
-("The Dark Knight Rises","Christian Bale", "Bruce Wayne"), ("The Dark Knight Rises","Gary Oldman", "Commissioner Gordon"), ("The Dark Knight Rises","Tom Hardy", "Bane"),
- ("The Dark Knight Rises","Joseph Gordon-Levitt", "John Blake"), ("The Dark Knight Rises","Anne Hathaway", "Selina Kyle");
+Values (1,"Christian Bale","Bruce Wayne" ), (1,"Michael Caine", "Alfred"), (1,"Liam Neeson", "Ra's Al Ghul"), (1,"Katie Holmes", "Rachel Dawes"), 
+(1,"Gary Oldman","Commissioner Gordon"), (2,"Christian Bale", "Bruce Wayne"), (2,"Heath Ledger", "Joker"), 
+(2,"Aaron Eckhart","Harvey Dent"), (2,"Michael Caine", "Alfred"), (2,"Maggie Gyllenhaal", "Rachel Dawes"), 
+(3,"Christian Bale", "Bruce Wayne"), (3,"Gary Oldman", "Commissioner Gordon"), (3,"Tom Hardy", "Bane"),
+ (3,"Joseph Gordon-Levitt", "John Blake"), (3,"Anne Hathaway", "Selina Kyle");
 
 --As a guest, I want to see a list of movies with the title, year released,
 --   MPAA rating, and studio information.
+.print "Movies"
 
-Select movies.name, movies.year, movies.MPAA_rating, studio.name
+Select movies.title, movies.year_released, movies.MPAA_rating, studio.name
 from studio
-INNER JOIN movies on studio.id = movies.studio_id
-WHERE studio.name = "Warner Bros";
+INNER JOIN movies on studio.id = movies.studio_id;
 
  --As a guest, I want to see the movies which a single studio has produced.
-SELECT movies.name, studio.name
+ 
+.print "Movie Studios"
+
+SELECT movies.title, studio.name
+from studio
+INNER JOIN movies on movies.studio_id= studio.id;
+
+--As a guest, I want to see each movie's cast including each actor's
+--   name and the name of the character they portray.
+.print "Cast"
+
+SELECT movies.title, talent.actor_name, talent.character_name
 from movies
-INNER JOIN movies on movies.studio_id=studio.id
-WHERE studio_name= "Warner Bros";
+INNER JOIN talent on talent.movie_id= movies.id
+;
 
-SELECT * from movies;
+--SELECT * from movies;
 
-SELECT * from studio;
+--SELECT * from studio;
 
-SELECT * from talent;
+--SELECT * from talent;
+
 -- In this assignment, you'll be building the domain model, database 
 -- structure, and data for "KMDB" (the Kellogg Movie Database).
 -- The end product will be a report that prints the movies and the 
@@ -180,8 +189,8 @@ SELECT * from talent;
 -- The Dark Knight Rises  Anne Hathaway         Selina Kyle
 
 -- Turns column mode on but headers off
-.mode column
-.headers off
+--.mode column
+--.headers off
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 -- TODO!
@@ -194,18 +203,18 @@ SELECT * from talent;
 -- TODO!
 
 -- Prints a header for the movies output
-.print "Movies"
-.print "======"
-.print ""
+--.print "Movies"
+--.print "======"
+--.print ""
 
 -- The SQL statement for the movies output
 -- TODO!
 
 -- Prints a header for the cast output
-.print ""
-.print "Top Cast"
-.print "========"
-.print ""
+--.print ""
+--.print "Top Cast"
+--.print "========"
+--.print ""
 
 
 -- The SQL statement for the cast output
