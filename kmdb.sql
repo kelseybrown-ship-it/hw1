@@ -1,3 +1,4 @@
+-- drop tables--
 DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS studio;
 DROP TABLE IF EXISTS talent;
@@ -38,7 +39,7 @@ INSERT INTO studio (
     name
 )
 
-Values (" Warner Bros");
+Values (" Warner Bros.");
 
 INSERT INTO talent (
     movie_id, actor_name, character_name)
@@ -71,8 +72,7 @@ INNER JOIN movies on movies.studio_id= studio.id;
 
 SELECT movies.title, talent.actor_name, talent.character_name
 from movies
-INNER JOIN talent on talent.movie_id= movies.id
-;
+INNER JOIN talent on talent.movie_id= movies.id;
 
 --SELECT * from movies;
 
